@@ -4556,58 +4556,35 @@ function library:new(cfg)
                 local esp_bounding_box = library:create("Square", {Visible = false, Parent = preview_frame; Size = UDim2.new(0, 195, 0, 240), Position = UDim2.new(0, 13.4, 0, 20), Color = Color3.fromRGB(255, 255, 255), Thickness = 1, Filled = false, ZIndex = 16});
                 local esp_bounding_box_outline = library:outline(esp_bounding_box, Color3.fromRGB(0, 0, 0), 16);
 
-                local esp_health_bar_outline = library:create("Square", {Visible = false, Parent = preview_frame; Size = UDim2.new(0, 3, 0, 240), Position = UDim2.new(0, 6, 0, 20), Color = Color3.fromRGB(0, 0, 0), Thickness = 1, Filled = true, ZIndex = 16});
-                local esp_health_bar_outline_2 = library:outline(esp_health_bar_outline, Color3.new(0,0,0), 16)
-                local esp_health_bar = library:create("Square", {Parent = esp_health_bar_outline; Size = UDim2.new(1,0,1,0), Color = Color3.fromRGB(0, 255, 42), Thickness = 1, Filled = true, ZIndex = 16, Position = UDim2.new(0,0,1,0)});
-                local esp_health_text = library:create("Text", {Text = tostring("<- "..healthamount), Parent = esp_health_bar, Visible = true, Transparency = 1, Color = maincolor, Size = 13, Center = false, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(1,0,0,0), ZIndex = 16});
+                local esp_cooldown_bar_outline = library:create("Square", {Visible = false, Parent = preview_frame; Size = UDim2.new(0, 3, 0, 240), Position = UDim2.new(0, 6, 0, 20), Color = Color3.fromRGB(0, 0, 0), Thickness = 1, Filled = true, ZIndex = 16});
+                local esp_cooldown_bar_outline_2 = library:outline(esp_health_bar_outline, Color3.new(0,0,0), 16)
+                local esp_cooldown_bar = library:create("Square", {Parent = esp_health_bar_outline; Size = UDim2.new(1,0,1,0), Color = Color3.fromRGB(0, 255, 42), Thickness = 1, Filled = true, ZIndex = 16, Position = UDim2.new(0,0,1,0)});
 
-                local esp_name = library:create("Text", {Text = "player", Parent = preview_frame, Visible = false, Transparency = 1, Color = Color3.fromRGB(255, 255, 255), Size = 13, Center = true, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(0, 110, 0, 3), ZIndex = 16});
-                local esp_distance = library:create("Text", {Text = "0 meters", Parent = preview_frame, Visible = false, Transparency = 1, Color = Color3.fromRGB(255, 255, 255), Size = 13, Center = true, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(0, 110, 0, 260), ZIndex = 16});
-                local esp_weapon = library:create("Text", {Text = "weapon", Parent = preview_frame, Visible = false, Transparency = 1, Color = Color3.fromRGB(255, 255, 255), Size = 13, Center = true, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(0, 110, 0, 270), ZIndex = 16});
-                --
-                function esp_preview:set_health(amount)
+                local esp_name = library:create("Text", {Text = "player", Parent = preview_frame, Visible = false, Transparency = 1, Color = Color3.fromRGB(255, 255, 255), Size = 13, Center = true, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(0, 110, 0, 3), ZIndex = 16});  --
+                function esp_preview:set_cooldown(amount)
                     local value = amount/100
-                    healthamount = amount/100
-                    esp_health_bar.Size = UDim2.new(1,0,0,-(esp_health_bar_outline.Size.Y.Offset * value));
-                    esp_health_bar.Color = emptycolor:Lerp(maincolor, amount/100);
-                    esp_health_text.Text = tostring("<- "..math.floor(amount/100 * 100))
-                    esp_health_text.Color = emptycolor:Lerp(maincolor, amount/100);
-                    esp_health_text.Position = UDim2.new(1,0,0,-(esp_health_bar_outline.Size.Y.Offset * value) - 6)
+                    cooldown = amount/100
+                    esp_cooldown_bar.Size = UDim2.new(1,0,0,-(esp_cooldown_bar_outline.Size.Y.Offset * value));
+                    esp_cooldown_bar.Color = emptycolor:Lerp(maincolor, amount/100);
                 end;
                 --
                 function esp_preview:set_health_colors(type, color)
                     if type == "main" then
                         maincolor = color
-                        esp_health_bar.Color = emptycolor:Lerp(maincolor, healthamount);
-                        esp_health_text.Color = emptycolor:Lerp(maincolor, healthamount);
+                        esp_cooldown_bar.Color = emptycolor:Lerp(maincolor, healthamount);
                     elseif type == "empty" then
                         emptycolor = color
-                        esp_health_bar.Color = emptycolor:Lerp(maincolor, healthamount);
-                        esp_health_text.Color = emptycolor:Lerp(maincolor, healthamount);
+                        esp_cooldown_bar.Color = emptycolor:Lerp(maincolor, healthamount);
                     end
                 end;
                 --
                 function esp_preview:set_visibility(element, state)
                     if element == "box" then
                         esp_bounding_box.Visible = state
-                    elseif element == "healthbar" then
-                        esp_health_bar_outline.Visible = state
+                    elseif element == "cooldown" then
+                        esp_cooldown_bar.Visible = state
                     elseif element == "name" then
                         esp_name.Visible = state
-                    elseif element == "distance" then
-                        esp_distance.Visible = state
-                        if esp_weapon.Visible and esp_distance.Visible == false then
-                            esp_weapon.Position = UDim2.new(0, 110, 0, 260)
-                        else
-                            esp_weapon.Position = UDim2.new(0, 110, 0, 270)
-                        end
-                    elseif element == "weapon" then
-                        esp_weapon.Visible = state
-                        if esp_weapon.Visible and esp_distance.Visible == false then
-                            esp_weapon.Position = UDim2.new(0, 110, 0, 260)
-                        else
-                            esp_weapon.Position = UDim2.new(0, 110, 0, 270)
-                        end
                     end
                 end
                 --
@@ -4616,21 +4593,13 @@ function library:new(cfg)
                         esp_bounding_box.Color = state
                     elseif element == "box outline" then
                         esp_bounding_box_outline.Color = state
-                    elseif element == "healthbar outline" then
+                    elseif element == "cooldown outline" then
                         esp_health_bar_outline.Color = state
                         esp_health_bar_outline_2.Color = state
                     elseif element == "name" then
                         esp_name.Color = state
                     elseif element == "name outline" then
                         esp_name.OutlineColor = state
-                    elseif element == "distance" then
-                        esp_distance.Color = state
-                    elseif element == "distance outline" then
-                        esp_distance.OutlineColor = state
-                    elseif element == "weapon" then
-                        esp_weapon.Color = state
-                    elseif element == "weapon outline" then
-                        esp_weapon.OutlineColor = state
                     end
                 end
                 --
