@@ -378,6 +378,8 @@ library:connect(game:GetService('RunService').RenderStepped, function()
     end
 end)
 
+local originalState = nil
+
 function library:set_open(bool)
     if typeof(bool) == 'boolean' then
         --[=[
@@ -402,7 +404,7 @@ function library:set_open(bool)
         cursor2.Visible = bool
         local ContextActionService = game:GetService("ContextActionService")
         local InputService = game:GetService('UserInputService')
-        local originalState = InputService.MouseIconEnabled
+        originalState = InputService.MouseIconEnabled
         if bool then
             local ContextActionService = game:GetService("ContextActionService")
             ContextActionService:BindAction(
