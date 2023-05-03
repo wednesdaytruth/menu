@@ -4309,7 +4309,7 @@ function library:new(cfg)
                     Font = Drawing.Fonts.Plex,
                     Size = 13,
                     Theme = "Un-Selected_Text",
-                    Position = UDim2.new(1,-40,0,-5),
+                    Position = UDim2.new(1,-35,0,-5),
                     ZIndex = 14,
                     Parent = holder,
                     Outline = false,
@@ -6252,4 +6252,4 @@ function library:createwatermark(info)
     return watermark
 end
 
-return library, utility;
+return library, utility
