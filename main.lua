@@ -4557,8 +4557,8 @@ function library:new(cfg)
                 local esp_bounding_box_outline = library:outline(esp_bounding_box, Color3.fromRGB(0, 0, 0), 16);
 
                 local esp_cooldown_bar_outline = library:create("Square", {Visible = false, Parent = preview_frame; Size = UDim2.new(0, 3, 0, 240), Position = UDim2.new(0, 6, 0, 20), Color = Color3.fromRGB(0, 0, 0), Thickness = 1, Filled = true, ZIndex = 16});
-                local esp_cooldown_bar_outline_2 = library:outline(esp_health_bar_outline, Color3.new(0,0,0), 16)
-                local esp_cooldown_bar = library:create("Square", {Parent = esp_health_bar_outline; Size = UDim2.new(1,0,1,0), Color = Color3.fromRGB(0, 255, 42), Thickness = 1, Filled = true, ZIndex = 16, Position = UDim2.new(0,0,1,0)});
+                local esp_cooldown_bar_outline_2 = library:outline(esp_cooldown_bar_outline, Color3.new(0,0,0), 16)
+                local esp_cooldown_bar = library:create("Square", {Parent = esp_cooldown_bar_outline; Size = UDim2.new(1,0,1,0), Color = Color3.fromRGB(0, 255, 42), Thickness = 1, Filled = true, ZIndex = 16, Position = UDim2.new(0,0,1,0)});
 
                 local esp_name = library:create("Text", {Text = "player", Parent = preview_frame, Visible = false, Transparency = 1, Color = Color3.fromRGB(255, 255, 255), Size = 13, Center = true, Outline = true, Font = Drawing.Fonts.Plex, Position = UDim2.new(0, 110, 0, 3), ZIndex = 16});  --
                 function esp_preview:set_cooldown(amount)
