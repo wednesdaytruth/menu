@@ -4568,7 +4568,7 @@ function library:new(cfg)
                     esp_cooldown_bar.Color = emptycolor:Lerp(maincolor, amount/100);
                 end;
                 --
-                function esp_preview:set_health_colors(type, color)
+                function esp_preview:set_cooldown_color(type, color)
                     if type == "main" then
                         maincolor = color
                         esp_cooldown_bar.Color = emptycolor:Lerp(maincolor, healthamount);
@@ -4607,6 +4607,8 @@ function library:new(cfg)
                     section_holder.Size = UDim2.new(1,0,0,section_content.AbsoluteContentSize + 20);
                 end;
                 --
+
+		esp_preview:set_cooldown(70)
                 return esp_preview;
             end;
             --
