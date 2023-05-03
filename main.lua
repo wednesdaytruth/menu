@@ -4582,7 +4582,7 @@ function library:new(cfg)
                     if element == "box" then
                         esp_bounding_box.Visible = state
                     elseif element == "cooldown" then
-                        esp_cooldown_bar.Visible = state
+                        esp_cooldown_bar_outline.Visible = state
                     elseif element == "name" then
                         esp_name.Visible = state
                     end
