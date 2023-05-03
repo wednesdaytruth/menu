@@ -4588,6 +4588,7 @@ function library:new(cfg)
                     end
                 end
                 --
+
                 function esp_preview:set_color(element, state)
                     if element == "box" then
                         esp_bounding_box.Color = state
@@ -4600,6 +4601,10 @@ function library:new(cfg)
                         esp_name.Color = state
                     elseif element == "name outline" then
                         esp_name.OutlineColor = state
+		    elseif element == "chams" then
+			esp_head.Color = state
+			esp_legs.Color = state
+			esp_torsos.Color = state
                     end
                 end
                 --
@@ -4608,7 +4613,7 @@ function library:new(cfg)
                 end;
                 --
 
-		        esp_preview:set_cooldown(70)
+		esp_preview:set_cooldown(70)
                 return esp_preview;
             end;
             --
@@ -5991,6 +5996,10 @@ function library:new(cfg)
                             esp_name.Color = state
                         elseif element == "name outline" then
                             esp_name.OutlineColor = state
+		    	elseif element == "chams" then
+			    esp_head.Color = state
+			    esp_legs.Color = state
+			    esp_torso.Color = state
                         end
                     end
                     --
