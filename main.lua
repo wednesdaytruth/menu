@@ -6253,4 +6253,4 @@ function library:createwatermark(info)
     return watermark
 end
 
-return library;
+return library, utility;
